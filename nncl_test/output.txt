@@ -1,0 +1,39 @@
+# nThread 1 nGpus 3 minBytes 8 maxBytes 134217728 step: 2(factor) warmup iters: 5 iters: 20 agg iters: 1 validation: 1 graph: 0
+#
+# Using devices
+#  Rank  0 Group  0 Pid 105556 on ncar-gpu-0 device  0 [0x01] NVIDIA GeForce RTX 3090
+#  Rank  1 Group  0 Pid 105556 on ncar-gpu-0 device  1 [0x02] NVIDIA GeForce RTX 3090
+#  Rank  2 Group  0 Pid 105556 on ncar-gpu-0 device  2 [0x06] NVIDIA GeForce RTX 3090
+#
+#                                                              out-of-place                       in-place          
+#       size         count      type   redop    root     time   algbw   busbw #wrong     time   algbw   busbw #wrong
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)            (us)  (GB/s)  (GB/s)       
+           8             2     float     sum      -1    16.40    0.00    0.00      0    16.47    0.00    0.00      0
+          16             4     float     sum      -1    16.10    0.00    0.00      0    16.27    0.00    0.00      0
+          32             8     float     sum      -1    16.57    0.00    0.00      0    16.01    0.00    0.00      0
+          64            16     float     sum      -1    17.02    0.00    0.01      0    16.56    0.00    0.01      0
+         128            32     float     sum      -1    17.57    0.01    0.01      0    17.72    0.01    0.01      0
+         256            64     float     sum      -1    17.28    0.01    0.02      0    17.35    0.01    0.02      0
+         512           128     float     sum      -1    19.27    0.03    0.04      0    18.69    0.03    0.04      0
+        1024           256     float     sum      -1    20.58    0.05    0.07      0    20.33    0.05    0.07      0
+        2048           512     float     sum      -1    47.64    0.04    0.06      0    47.58    0.04    0.06      0
+        4096          1024     float     sum      -1    60.26    0.07    0.09      0    61.26    0.07    0.09      0
+        8192          2048     float     sum      -1    69.38    0.12    0.16      0    68.96    0.12    0.16      0
+       16384          4096     float     sum      -1    96.76    0.17    0.23      0    95.49    0.17    0.23      0
+       32768          8192     float     sum      -1    130.0    0.25    0.34      0    129.8    0.25    0.34      0
+       65536         16384     float     sum      -1    216.2    0.30    0.40      0    215.9    0.30    0.40      0
+      131072         32768     float     sum      -1    390.7    0.34    0.45      0    389.2    0.34    0.45      0
+      262144         65536     float     sum      -1    699.9    0.37    0.50      0    696.3    0.38    0.50      0
+      524288        131072     float     sum      -1   1312.5    0.40    0.53      0   1302.8    0.40    0.54      0
+     1048576        262144     float     sum      -1   2471.3    0.42    0.57      0   2459.0    0.43    0.57      0
+     2097152        524288     float     sum      -1   4843.3    0.43    0.58      0   4877.0    0.43    0.57      0
+     4194304       1048576     float     sum      -1   9531.6    0.44    0.59      0   9508.7    0.44    0.59      0
+     8388608       2097152     float     sum      -1    18831    0.45    0.59      0    18824    0.45    0.59      0
+    16777216       4194304     float     sum      -1    37495    0.45    0.60      0    37476    0.45    0.60      0
+    33554432       8388608     float     sum      -1    74866    0.45    0.60      0    74852    0.45    0.60      0
+    67108864      16777216     float     sum      -1   149452    0.45    0.60      0   149658    0.45    0.60      0
+   134217728      33554432     float     sum      -1   298315    0.45    0.60      0   298377    0.45    0.60      0
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 0.304595 
+#
+
