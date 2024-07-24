@@ -67,7 +67,7 @@ for epoch in range(num_epochs):
     # with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA], record_shapes=True) as prof:
 
     total_loss = 0
-    for batch in tqdm(train_loader, desc=f"Epoch {epoch+1}/{num_epochs}"):
+    for batch in tqdm(train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}"):
 
         # if step >= 10:
         #     break
