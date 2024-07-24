@@ -60,30 +60,25 @@ model.to(gpu_id)
 model = DDP(model, device_ids=[gpu_id])
 
 num_epochs = 3
-from torch.profiler import profile, record_function, ProfilerActivity
+# from torch.profiler import profile, record_function, ProfilerActivity
 for epoch in range(num_epochs):
-    with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA], record_shapes=True) as prof:
-        total_loss = 0
-        for step, batch in tqdm(enumerate(train_loader), desc=f"Epoch {epoch+1}/{num_epochs}"):
-
-            if step >= 10:
-                break
-            with record_function("training_step"):
-
-                input_ids = batch['input_ids'].to(gpu_id)
-                attention_mask = batch['attention_mask'].to(gpu_id)
-                
-                optimizer.zero_grad()
-                
-                outputs = model(input_ids, attention_mask=attention_mask, labels=input_ids)
-                loss = outputs.loss
-                
-                loss.backward()
-                optimizer.step()
-                
-                total_loss += loss.item()
-    print(prof.key_averages().table(sort_by="cuda_time_total", row_limit=10))
-    prof.export_chrome_trace(f"{gpu_id}-trace.json")
+    # with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA], record_shapes=True) as prof:
+    total_loss = 0
+    for batch in tqdm(train_loader, desc=f"Epoch {epoch+1}/{num_epochs}"):
+        input_ids = batch['input_ids'].to(gpu_id)
+        attention_mask = batch['attention_mask'].to(gpu_id)
+        
+        optimizer.zero_grad()
+        
+        outputs = model(input_ids, attention_mask=attention_mask, labels=input_ids)
+        loss = outputs.loss
+        
+        loss.backward()
+        optimizer.step()
+        
+        total_loss += loss.item()
+    # print(prof.key_averages().table(sort_by="cuda_time_total", row_limit=10))
+    # prof.export_chrome_trace(f"{gpu_id}-trace.json")
     avg_loss = total_loss / len(train_loader)
     print(f"Epoch {epoch+1}/{num_epochs}, Average Loss: {avg_loss:.4f}")
 
