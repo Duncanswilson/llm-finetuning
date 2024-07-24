@@ -38,7 +38,7 @@ tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 tokenizer.pad_token = tokenizer.eos_token
 
 train_dataset = HellaSwagDataset(dataset['train'], tokenizer, max_length=128)
-train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True, num_workers=32, pin_memory=True)
+train_loader = DataLoader(train_dataset, batch_size=128, shuffle=True, num_workers=32, pin_memory=True)
 
 # 3. Load model
 model = GPT2LMHeadModel.from_pretrained('gpt2')
