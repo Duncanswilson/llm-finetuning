@@ -1,15 +1,7 @@
 # llm-finetuning
 
-this repo is an exploration of finetuning LMs on custom datasets (for starters, the hellaswag training dataset) 
+this repo is an exploration of finetuning LMs on custom datasets (for starters, finetuning GPT2 on the hellaswag training dataset) 
 
-to run the single GPU case, `cd` into the repo and then run 
-```
-python finetuning_gpt2_hellaswag_pure_pytorch.py
-``` 
-on a snigle 3090, I get about ~4 mins per epoch. 
+we've fixed the local bug that was causing slowdowns (it was a BIOS level change of the PCI Link speed) so now these scrip  ts are performing and show speedup when run across multiple GPUs. 
 
-to run the multi-GPU case, make sure you have `accelerate` installed and then run
-```
-accelerate launch parallel_finetuning_gpt2_hellaswag_pure_pytorch.py
-```
-annoyingly, even though all 3 3090s on my set up get used, I see about ~12 mins per epoch.  
+recently added a DPO script which leverages `peft` and `trl` to do Direct Preference Optimization on Intel's version of the ORCA dataset.
